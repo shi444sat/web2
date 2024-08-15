@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY LOVE 😍</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+ 
+
+ </style>
+</head>
+<body>
+    <main>
+        <ul class='slider'>
+            <li class='item' id="slide1" style="background-image: url('images/pic_1.jpg')">
+                <div class='content'>
+                    <h2 class='title'>You are Magical</h2>
+                    <p class='description'>I was thinking about you today and couldn't help but smile. Your presence has a way of making everything better✨.</p>
+                     
+                </div>
+                <audio src="audio/mannat.mp3" id="audio1"></audio>
+            </li>
+        
+             <li class='item' id="slide2" style="background-image: url('images/pic_4.jpg')">
+                <div class='content'>
+                    <h2 class='title'>"You are Always in my mind"</h2>
+                    <p class='description'> "You're like a fine wine🌟 you get better with time. 🌟 "</p>
+                    
+                </div>
+                <audio src="audio/aanchal.mp3" id="audio2"></audio>
+            </li>
+            <li class='item' id="slide3" style="background-image: url('images/pic_3.jpg')">
+                <div class='content'>
+                    <h2 class='title'>"When i Lost I find You.."</h2>
+                    <p class='description'>"Do you have a map? Because I just keep getting lost in your eyes every time I see you.🌟"</p>
+                    
+                </div>
+                <audio src="audio/dalii.mp3" id="audio3"></audio>
+            </li>
+            <li class='item' id="slide4" style="background-image: url('images/pic_2.jpg')">
+                <div class='content'>
+                      <h2 class='title'>"Your Eyes..."</h2>
+                      <p class='description'> "Are you a magician? Because whenever I look at you, everyone else disappears. 😍 </p>
+                </div>
+                <audio src="audio/kajal.mp3" id="audio4"></audio>
+            </li>
+            <li class='item' id="slide5" style="background-image: url('images/pic_5.jpg')">
+                <div class='content'>
+                    <h2 class='title'>"You're flower..."</h2>
+                    <p class='description'>"Whenever I see a flower It reminds me of you."</p>
+                    
+                </div>
+                <audio src="audio/chara.mp3" id="audio5"></audio>
+            </li>
+        </ul>
+        <nav class='nav'>
+            <!-- Only forward arrow icon -->
+            <ion-icon class='btn next' name="arrow-forward-outline" id="forwardArrow"></ion-icon>
+        </nav>
+    </main>
+      
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <!-- partial -->
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentSlide = 1;
+            var totalSlides = document.querySelectorAll('.slider .item').length;
+
+            document.getElementById('forwardArrow').addEventListener('click', function () {
+                changeSlide(1); // Move to the next slide
+            });
+
+            function changeSlide(direction) {
+                var audio = document.getElementById('audio' + currentSlide);
+                if (!audio.paused) {
+                    audio.pause(); // Pause the audio of the current slide
+                }
+
+                var nextSlide = currentSlide + direction;
+                if (nextSlide < 1) {
+                    nextSlide = totalSlides; // Move to the last slide if reaching the beginning
+                } else if (nextSlide > totalSlides) {
+                    nextSlide = 1; // Move to the first slide if reaching the end
+                }
+
+                showSlide(nextSlide); // Show the next slide
+                currentSlide = nextSlide; // Update the current slide index
+            }
+
+            function showSlide(slideIndex) {
+                var slides = document.querySelectorAll('.slider .item');
+                for (var i = 0; i < slides.length; i++) {
+                    slides[i].classList.remove('active'); // Hide all slides
+                }
+
+                // Adjust slideIndex to match 0-based indexing
+                slideIndex = (slideIndex + totalSlides - 1) % totalSlides;
+                slides[slideIndex].classList.add('active'); // Show the active slide
+
+                var audio = document.getElementById('audio' + (slideIndex + 1)); // Adjust index for audio
+                audio.currentTime = 0; // Rewind the audio to the beginning
+                audio.play(); // Play the audio of the current slide
+            }
+        });
+    </script>
+</body>
+</html>
